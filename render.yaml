@@ -1,0 +1,27 @@
+# .render.yaml
+services:
+  - type: web
+    name: social-media-app
+    env: python
+    runtime: python311
+    buildCommand: docker build -t app .
+    startCommand: docker run -p 8000:8000 app sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000
+    environmentVariables:
+      - key: SECRET_KEY
+        value: django-insecure-q8-^dl6ya+%mc#x-pqsofg5^4s-oslbp5uuyen)+)ri07#xo&=
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: DATABASE_NAME
+        value: social_media_db
+      - key: DATABASE_USER
+        value: django_user
+      - key: DATABASE_PASSWORD
+        value: strongpassword123
+      - key: DATABASE_HOST
+        value: db
+      - key: DATABASE_PORT
+        value: "5432"
